@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Control de Gastos - Vuejs</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"  crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div id="app">    
+      <div class="row">
+        <div class="col-xs-12">
+          <h3 class="jumbotron">VueJs - Control de Gastos</h1>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th style="width:40px;"></th>
+                  <th>Descripción</th>
+                  <th style="width:200px;">Monto</th>
+                  <th style="width:100px;">Cancelado<th>
+                </tr>
+              </thead>
+              <body>
+                <tr>
+                  <td></td>
+                  <td>
+                      <input type="text" v-model="nuevoName" class="form-control" id="descripcion_item01" placeholder="Descripcion o nombre de la cuenta">
+                  </td>
+                  <td>
+                      <input type="text" v-model="nuevoAmount" class="form-control" id="ejemplo_password_3" placeholder="Monto o cuenta">
+                  </td>
+                  <td> 
+                      <button type="submit" class="btn btn-default" v-bind:class="nuevoName.length <=2 ? 'disabled':''"  v-on:click="agregarItem">Agregar Cuenta</button>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr v-if="items.length===0">
+                    <td colspan="5" class="text-center">No hay registros que mostrar</td>
+                </tr>
+                <tr v-for="(item, index) in items">
+                  <td>
+                    <a href="#" v-on:click="deleteTarea(index, item)" v-if="!item.paid">
+                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </a>
+                  </td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.amount.toFixed(2) }}</td>
+                  <td class="text-center">
+                    <!-- <button class="btn btn-default btn-sm" v-bind:class="{'btn-success': item.paid}">
+                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button> -->
+                    <a href="#" v-on:click="item.paid = !item.paid">
+                      <span aria-hidden="true" class="glyphicon " v-bind:class="item.paid==false ? 'glyphicon-remove':'glyphicon-ok'"></span>
+                    </a>
+                  </td>
+                  <td></td>
+                </tr>
+              </body>
+              <tfoot>
+                <tr class="text-danger">
+                  <td></td>
+                  <td class="text-right">Por pagar</td>
+                  <td>{{ totalAmount(0) }}</td>
+                  <td></td>
+                </tr>
+                <tr class="text-success">
+                  <td></td>
+                  <td class="text-right">Pagado</td>
+                  <td>{{ totalAmount(1) }}</td>
+                  <td></td>
+                </tr>
+                <tr class="text-info">
+                  <td></td>
+                  <td class="text-right">Total</td>
+                  <td>{{ totalAmount(2) }}</td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+            <!-- <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Cuenta: {{ nuevoName}}</h3>
+              </div>
+              <div class="panel-body" item-width="100px">
+                <form class="form-horizontal" role="form"  v-on:click="agregarItem">
+                      <div class="form-group">
+                        <label for="descripcion_item01" class="col-lg-2 control-label">Descripcion</label>
+                        <div class="col-lg-6">
+                          <input type="text" v-model="nuevoName" class="form-control" id="descripcion_item01" placeholder="Descripcion o nombre de la cuenta">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="ejemplo_password_3" class="col-lg-2 control-label">Monto</label>
+                        <div class="col-lg-6">
+                          <input type="text" v-model="nuevoAmount" class="form-control" id="ejemplo_password_3" 
+                                  placeholder="Monto o cuenta">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-6">
+                          <button type="submit" class="btn btn-default" v-bind:class="nuevoName.length <=2 ? 'disabled':''" >Agregar Cuenta</button>
+                        </div>
+                      </div>
+                    </form>                
+              </div>
+            </div> -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <hr>
+          <pre>
+            {{ $data }}
+          </pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/vue"></script>  
+  <script src="maincode.js"></script>
+</body>
+</html>
