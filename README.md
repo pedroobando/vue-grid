@@ -11,7 +11,7 @@ Sencillo ejemplo con VueJs, en le cual se llevan las cuentas pagadas, se realiza
   index.html
 ```
 <p align="center">
-    <img src="./src/gastosvuejs.png" width="560px">
+    <img src="./src/gastosvuejs.png" width="660px">
 </p>
 Cuentas de gastos, se puede agregar, borrar y pagar.
 
